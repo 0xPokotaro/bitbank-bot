@@ -1,0 +1,49 @@
+# Dependencies
+node_modules/
+
+# pnpm
+.pnpm-store/
+.pnpm-debug.log*
+
+# Build & cache
+dist/
+.turbo/
+*.tsbuildinfo
+
+# Next.js
+.next/
+out/
+.vercel/
+
+# Docker / DB volumes (compose.yml でマウント)
+data/
+logs/
+postgres-data/
+
+# Environment
+.env
+.env.*
+!.env.example
+
+# OS
+.DS_Store
+Thumbs.db
+
+# IDE (必要なら .vscode はコミット可)
+.idea/
+*.swp
+*.swo
+*~
+
+# Logs & debug
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Test
+coverage/
+.nyc_output/
+
+# Misc
+*.local
