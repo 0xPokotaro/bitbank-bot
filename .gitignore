@@ -16,9 +16,7 @@ out/
 .vercel/
 
 # Docker / DB volumes (compose.yml でマウント)
-data/
-logs/
-postgres-data/
+docker/
 
 # Environment
 .env

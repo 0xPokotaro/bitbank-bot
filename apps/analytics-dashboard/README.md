@@ -1,36 +1,70 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Analytics Dashboard
+
+Bot のパフォーマンスを可視化する Next.js ダッシュボード。戦略改善のための KPI とトレード分析を提供する。
+
+## 要件定義
+
+### 目的
+
+Bot のパフォーマンスを可視化し、戦略改善によって勝率と期待値を最大化する。
+
+| レベル     | 目的                         |
+| ---------- | ---------------------------- |
+| 最終目的   | 資産を増やす                 |
+| 戦略目的   | Bot の勝率・期待値を高める   |
+| 運用目的   | Bot の状態を分析し改善する   |
+| ダッシュボード目的 | 意思決定のためのデータを可視化する |
+
+### 役割
+
+Bot の状態をリアルタイムで観測し、戦略改善のための洞察を得る。
+
+### 分析観点
+
+| 観点 | 内容 |
+| ---- | ---- |
+| Strategy | Bot 設定 |
+| Market | 市場環境 |
+| Performance | 結果 |
+
+**Market Environment**（拡張可能な定義）
+
+Bot のパフォーマンスに影響を与える外部要因の総称。以下のカテゴリを含む。
+
+| カテゴリ | 説明 |
+| -------- | ---- |
+| Price Environment | 価格環境 |
+| Market Structure | 市場構造 |
+| Market Sentiment | 市場センチメント |
+
+### KPI
+
+| カテゴリ     | 指標 |
+| ------------ | ---- |
+| **Profit**   | Total PnL / Daily PnL / Strategy PnL |
+| **勝率**     | Win Rate / Win/Loss Ratio / Profit Factor |
+| **リスク**   | Max Drawdown / Volatility / Exposure |
+| **トレード分析** | Average trade / Holding time / Slippage |
+
+---
 
 ## Getting Started
 
-First, run the development server:
+リポジトリルートから:
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
 pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+このアプリのみ起動する場合（`apps/analytics-dashboard` で）:
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```bash
+pnpm dev
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+ブラウザで [http://localhost:3000](http://localhost:3000) を開く。編集は `src/app/page.tsx` から。フォントは [Geist](https://vercel.com/font)（`next/font`）を使用。
 
-## Learn More
+## 参考
 
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- [Next.js Documentation](https://nextjs.org/docs)
+- [Next.js Deployment](https://nextjs.org/docs/app/building-your-application/deploying)（Vercel 等）
