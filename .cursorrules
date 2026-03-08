@@ -1,0 +1,25 @@
+# Commit Message
+
+Follow these rules for commit messages.
+
+## Format
+
+```
+<type>: <subject>
+```
+
+- **type**: One of  
+  `feat` / `fix` / `docs` / `chore` / `refactor` / `test` / `style`
+- **subject**: 50 chars or less, imperative mood, no period at the end
+
+## Examples
+
+- `feat: add chart to dashboard`
+- `fix: correct login redirect destination`
+- `chore: add turbo`
+- `docs: add setup steps to README`
+
+## Notes
+
+- Add a blank line before the body when a longer description is needed
+- For breaking changes, append `!` to the subject or document BREAKING CHANGE in the body
