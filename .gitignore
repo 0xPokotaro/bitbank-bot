@@ -43,5 +43,12 @@ yarn-error.log*
 coverage/
 .nyc_output/
 
+# Terraform
+infra/build/
+infra/.terraform/
+*.tfstate
+*.tfstate.*
+.terraform.lock.hcl
+
 # Misc
 *.local

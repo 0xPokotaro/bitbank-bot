@@ -1,65 +1,92 @@
-import Image from "next/image";
+import { BtcJpyPriceCard } from "@/components/dashboard/btc-jpy-price-card";
+import {
+  currentPrice,
+  change24hPct,
+  change24hAbs,
+  high24h,
+  low24h,
+} from "@/lib/sample-data";
+
+function jpy(n: number): string {
+  return `¥${Math.abs(n).toLocaleString("ja-JP")}`;
+}
+
+const statPanels = [
+  {
+    title: "現在価格",
+    value: jpy(currentPrice),
+    sub: "BTC / JPY",
+    valueClass: "text-zinc-100",
+  },
+  {
+    title: "24時間変化",
+    value: `${change24hPct >= 0 ? "+" : ""}${change24hPct.toFixed(2)}%`,
+    sub: `${change24hAbs >= 0 ? "+" : "−"}${jpy(change24hAbs)}`,
+    valueClass: change24hPct >= 0 ? "text-green-400" : "text-red-400",
+  },
+  {
+    title: "24時間高値",
+    value: jpy(high24h),
+    sub: "High",
+    valueClass: "text-zinc-100",
+  },
+  {
+    title: "24時間安値",
+    value: jpy(low24h),
+    sub: "Low",
+    valueClass: "text-zinc-100",
+  },
+];
 
 export default function Home() {
   return (
-    <div className="flex min-h-screen items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex min-h-screen w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
+    <div className="p-3 md:p-4 space-y-3">
+      {/* Dashboard header */}
+      <div className="flex items-center justify-between py-1">
+        <div>
+          <h1 className="text-sm font-medium text-zinc-200">BTC/JPY ダッシュボード</h1>
+          <p className="text-[11px] text-zinc-500 mt-0.5">bitbank Bot Analytics</p>
         </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
+        <div className="flex items-center gap-1.5 text-xs text-zinc-400 bg-[#1c2025] border border-[#2c3235] rounded-sm px-2.5 py-1 select-none">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="12"
+            height="12"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            className="text-zinc-500"
           >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
+            <circle cx="12" cy="12" r="10" />
+            <polyline points="12 6 12 12 16 14" />
+          </svg>
+          <span>直近 24 時間</span>
         </div>
-      </main>
+      </div>
+
+      {/* Stat panels */}
+      <div className="grid grid-cols-2 lg:grid-cols-4 gap-2">
+        {statPanels.map((panel) => (
+          <div
+            key={panel.title}
+            className="bg-[#181b1f] border border-[#2c3235] rounded-sm p-3 flex flex-col gap-1"
+          >
+            <div className="text-[10px] uppercase tracking-widest text-zinc-500">
+              {panel.title}
+            </div>
+            <div className={`text-2xl font-light tabular-nums ${panel.valueClass}`}>
+              {panel.value}
+            </div>
+            <div className="text-[11px] text-zinc-500">{panel.sub}</div>
+          </div>
+        ))}
+      </div>
+
+      {/* Price chart */}
+      <BtcJpyPriceCard />
     </div>
   );
 }

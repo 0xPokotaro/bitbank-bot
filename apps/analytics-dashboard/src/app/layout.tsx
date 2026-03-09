@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
-import { AppSidebar } from "@/app/components/layout/app-sidebar";
+import { AppSidebar } from "@/components/layout/app-sidebar";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -28,12 +28,33 @@ export default function RootLayout({
     <html lang="ja">
       <body
         suppressHydrationWarning
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${geistSans.variable} ${geistMono.variable} antialiased bg-[#111217] text-zinc-200`}
       >
-        <SidebarProvider>
+        <SidebarProvider
+          style={
+            {
+              "--sidebar": "oklch(0.13 0.006 264)",
+              "--sidebar-foreground": "oklch(0.85 0 0)",
+              "--sidebar-accent": "oklch(0.16 0.008 264)",
+              "--sidebar-accent-foreground": "oklch(0.90 0 0)",
+              "--sidebar-border": "oklch(0.22 0.006 264)",
+              "--sidebar-primary": "oklch(0.65 0.18 45)",
+              "--sidebar-primary-foreground": "oklch(0.98 0 0)",
+              "--sidebar-ring": "oklch(0.45 0 0)",
+            } as React.CSSProperties
+          }
+        >
           <AppSidebar />
-          <main>
-            <SidebarTrigger />
+          <main className="flex flex-1 flex-col min-h-screen bg-[#111217]">
+            <header className="h-9 border-b border-[#2c3235] flex items-center px-2 bg-[#181b1f] shrink-0 sticky top-0 z-50">
+              <SidebarTrigger className="text-zinc-500 hover:text-zinc-200 hover:bg-[#1c2025] h-7 w-7" />
+              <div className="w-px h-4 bg-[#2c3235] mx-2" />
+              <nav className="flex items-center text-xs text-zinc-400">
+                <span className="text-orange-500 font-medium">bitbank Bot</span>
+                <span className="mx-1.5 text-zinc-600">/</span>
+                <span className="text-zinc-300">ダッシュボード</span>
+              </nav>
+            </header>
             {children}
           </main>
         </SidebarProvider>
